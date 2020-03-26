@@ -1,0 +1,32 @@
+@startuml authentication_class
+
+class User {
+    int id
+    string username
+    DiscordUser discordUser
+    TwitchUser twitchUser
+    TwitterUser twitterUser
+    getUsername(): string
+}
+
+interface SocialUserInterface {
+    getSocialId(): int
+    getSocialUsername(): string
+}
+
+User *-- SocialUserInterface
+
+SocialUserInterface <|.. DiscordUser
+SocialUserInterface <|.. TwitchUser
+SocialUserInterface <|.. TwitterUser
+
+interface Authorizable {
+    getAuthorizeUri(): string
+    authorize(string token): Social
+}
+
+Authorizable <|.. Discord
+Authorizable <|.. Twitch
+Authorizable <|.. Twitter
+
+@enduml

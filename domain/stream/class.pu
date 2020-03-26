@@ -1,0 +1,22 @@
+@startuml stream_class
+
+class User {
+    Stream[] streams
+    getStreams(): Stream[]
+}
+
+interface StreamInterface {
+    isOnline(): boolean
+    getViewPageUri(): string
+    getStartAt(): DateTime
+    getViewers(): ?int
+}
+
+User *-- StreamInterface
+
+StreamInterface <|.. TwitchStream
+StreamInterface <|.. NicoStream
+StreamInterface <|.. YoutubeStream
+StreamInterface <|.. OpenrecStream
+
+@enduml

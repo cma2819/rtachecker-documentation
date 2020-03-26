@@ -1,0 +1,60 @@
+@startuml er_diagram
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity users {
+    * id
+    * remember_token
+}
+
+entity profiles {
+    * user_id
+    * username
+}
+profiles ||--|| users
+
+entity discord_profiles {
+    * discord_id
+    * user_id
+    * discord_username
+    * discord_hash
+}
+discord_profiles }o-|| profiles
+
+entity twitch_profiles {
+    * twitch_id
+    * user_id
+    * twitch_username
+}
+twitch_profiles }o--|| profiles
+
+entity twitter_profiles {
+    * twitter_id
+    * user_id
+    * twitter_username
+}
+twitter_profiles }o--|| profiles
+
+entity twitch_streams {
+    * id
+    * user_id
+    * name
+    * start_at
+    * finish_at
+}
+users ||--o{ twitch_streams
+
+entity youtube_streams {
+    * id
+    * user_id
+    * name
+    * start_at
+    * finish_at
+}
+users ||--o{ youtube_streams
+
+@enduml
