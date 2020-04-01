@@ -22,7 +22,6 @@ entity discord_profiles {
     * discord_id
     * user_id
     * discord_username
-    * discord_discriminator
 }
 discord_profiles }o-|| profiles
 
