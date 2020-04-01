@@ -9,12 +9,18 @@ class User {
     getUsername(): string
 }
 
+class Authentication {
+    int id
+    SocialUserInterface authorizedUser
+}
+
 interface SocialUserInterface {
-    getSocialId(): int
+    getSocialId(): string
     getSocialUsername(): string
 }
 
-User *-- SocialUserInterface
+User *- SocialUserInterface
+Authentication *-- SocialUserInterface
 
 SocialUserInterface <|.. DiscordUser
 SocialUserInterface <|.. TwitchUser
@@ -22,11 +28,21 @@ SocialUserInterface <|.. TwitterUser
 
 interface Authorizable {
     getAuthorizeUri(): string
-    authorize(string token): Social
+    authorize(string code): SocialUserInterface
 }
 
-Authorizable <|.. Discord
-Authorizable <|.. Twitch
-Authorizable <|.. Twitter
+Authorizable <|.. DiscordApi
+Authorizable <|.. TwitchApi
+Authorizable <|.. TwitterApi
+
+class AuthenticationService {
+    Authorizable authorizable
+    AuthenticationRepository repository
+}
+
+interface AuthenticationRepository
+
+AuthenticationService *- Authorizable
+AuthenticationService *-- AuthenticationRepository
 
 @enduml

@@ -18,14 +18,16 @@ entity profiles {
 profiles ||--|| users
 
 entity discord_profiles {
+    * id
     * discord_id
     * user_id
     * discord_username
-    * discord_hash
+    * discord_discriminator
 }
 discord_profiles }o-|| profiles
 
 entity twitch_profiles {
+    * id
     * twitch_id
     * user_id
     * twitch_username
@@ -33,6 +35,7 @@ entity twitch_profiles {
 twitch_profiles }o--|| profiles
 
 entity twitter_profiles {
+    * id
     * twitter_id
     * user_id
     * twitter_username
